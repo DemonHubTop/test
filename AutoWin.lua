@@ -1,93 +1,107 @@
--- Demon Hub🔥
-
-wait(1.2)
-
-game.StarterGui:SetCore("SendNotification", {
-
-Title = "Credits"; -- the title (ofc)
-
-Text = "Made by Demon/Jova,"; -- what the text says (ofc)
-
-Icon = ""; -- the image if u want.
-
-Duration = 5; -- how long the notification should in secounds
-
-})
-
-local Library = loadstring(Game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wizard"))()
-
-local Window = Library:NewWindow("DemonHub")
-local Section = Window:NewSection("Build a boat")
-
-Section:CreateToggle("Auto Win", function(value)
-
-local TweenService = game:GetService("TweenService")
-local Workspace = game:GetService("Workspace")
-
--- Define the teleport destinations
-local destinations = {
-	Workspace.BoatStages.NormalStages.CaveStage1.DarknessPart,
-	Workspace.BoatStages.NormalStages.CaveStage2.DarknessPart,
-	Workspace.BoatStages.NormalStages.CaveStage3.DarknessPart,
-	Workspace.BoatStages.NormalStages.CaveStage4.DarknessPart,
-	Workspace.BoatStages.NormalStages.CaveStage5.DarknessPart,
-	Workspace.BoatStages.NormalStages.CaveStage6.DarknessPart,
-	Workspace.BoatStages.NormalStages.CaveStage7.DarknessPart,
-	Workspace.BoatStages.NormalStages.CaveStage8.DarknessPart,
-	Workspace.BoatStages.NormalStages.CaveStage9.DarknessPart,
-	Workspace.BoatStages.NormalStages.CaveStage10.DarknessPart,
-}
-
--- Get the player's character
-local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-
--- Define the Tweening information
-local tweenInfo = TweenInfo.new(
-	2, -- Time
-	Enum.EasingStyle.Linear, -- Easing style
-	Enum.EasingDirection.InOut, -- Easing direction
-	0, -- Repeat count (0 means no repeat)
-	false, -- Reverses the tween on completion if true
-	0 -- Delay before tween starts
-)
-
--- Function to tween the character to a destination
-local function teleportCharacterTo(destination)
-	local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
-	if humanoidRootPart then
-		local goal = {CFrame = destination.CFrame}
-		local tween = TweenService:Create(humanoidRootPart, tweenInfo, goal)
-
-		local humanoid = character:FindFirstChildOfClass("Humanoid")
-		local originalGravity = humanoid.JumpPower -- store original jump power
-		humanoid.JumpPower = 0 -- set jump power to 0 to "freeze" in air
-
-		-- Anchor the HumanoidRootPart
-		local wasAnchored = humanoidRootPart.Anchored
-		humanoidRootPart.Anchored = true
-
-		tween.Completed:Connect(function()
-			humanoid.JumpPower = originalGravity -- restore original jump power
-			-- Restore original anchored state
-			humanoidRootPart.Anchored = wasAnchored
-		end)
-
-		tween:Play()
-		tween.Completed:Wait() -- Wait for the tween to complete before returning
-	end
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("Giga Hub", "Midnight")
+local Tab = Window:NewTab("LT2")
+local Section = Tab:NewSection("Main")
+Section:NewButton("Butter v2", "best script", function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/Butterisgood/Butter/main/lt2'))("")
+end)
+Section:NewButton("Dark X", "mod wood", function()
+    loadstring(game:HttpGet"https://raw.githubusercontent.com/darkxwin/darkxsourcethinkyoutousedarkx/main/darkx")()
+end)
+local Tab = Window:NewTab("BABFT")
+local Section = Tab:NewSection("Main")
+Section:NewButton("Neverlose", "Key Test/Beta/Delta", function()
+    -- Build A Boat
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Mana42138/Neverlose-UI/main/Scripts/Build%20A%20Boat.lua"))()
+    -- Key = Test/Beta
+end)
+Section:NewButton("Auto Build", "", function()
+    local old = httpget_async
+getgenv().httpget_async = function(url, ...)
+    if url == 'https://www.stenutilities.com/discord/babft' then
+        return 'https://discord.gg/HXYqGnEr2K'
+    end
+    
+    if url == 'https://raw.githubusercontent.com/StenDirt/Trash-Game/main/UI.lua' then
+        return old('https://raw.githubusercontent.com/Val1antt/scripts/main/BuildABoat/BackupLib.lua', ...)
+    end
+    
+    return old(url, ...)
 end
 
--- Teleport the character to each destination in order
-for _, destination in ipairs(destinations) do
-	teleportCharacterTo(destination)
-	wait(0.1) -- Wait for a second between each teleport
-end
-
--- Finally, teleport to TheEnd
-teleportCharacterTo(Workspace.BoatStages.NormalStages.TheEnd.GoldenChest.Trigger)
-
-print("DemonOnTop")
-end
-print(value)
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/Val1antt/scripts/main/BuildABoat/BuildABoatRestored.lua"),true))()
+end)
+local Tab = Window:NewTab("PSX")
+local Section = Tab:NewSection("Main")
+Section:NewButton("Project WD", "Best Script", function()
+    getgenv().boothsnipe = false
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/Muhammad6196/Project-WD/main/Mainstring.lua"))()
+end)
+Section:NewButton("Rafa Gui", "Some ...", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Rafacasari/roblox-scripts/main/psx.lua"))()
+end)
+local Tab = Window:NewTab("BloxFr")
+local Section = Tab:NewSection("Main")
+Section:NewButton("Auto Farm", "Some", function()
+	_G.Key = "E3R-O399-NIL"
+	loadstring(game:HttpGet(('https://raw.githubusercontent.com/BaconBABA/T-HUB/main/Main'),true))()
+end)
+Section:NewButton("Mukuru Hub", "Some", function()
+	loadstring(game:HttpGet"https://raw.githubusercontent.com/xQuartyx/DonateMe/main/ScriptLoader")()
+end)
+local Tab = Window:NewTab("BSS")
+local Section = Tab:NewSection("Main")
+Section:NewButton("Family Club", "Some", function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/FamilyClub124/Loader/main/Family"))()
+end)
+Section:NewButton("Macro v2", "Some", function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/kyoichi35/Kyoichi-Hub/main/Kyoichi%20hub"))()
+end)
+local Tab = Window:NewTab("Pls Donate")
+local Section = Tab:NewSection("Main")
+Section:NewButton("Can Hub", "Some", function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/stuffman0001/CanHub/main/Code"))()
+end)
+Section:NewButton("Binary Hub", "Some", function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/BinaryHubOfficial/binaryhub/main/init.lua"))()
+end)
+local Tab = Window:NewTab("Arsenal")
+local Section = Tab:NewSection("Main")
+Section:NewButton("Thunder Client", "Some", function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/antipipka/roblox/main/Arsenal.lua"))()
+end)
+Section:NewButton("Osy Hub", "Some", function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/NullProtector/NullProtector.github.io/main/Osy%20%7BProtected%20By%20Moonsec%5D"))()
+end)
+local Tab = Window:NewTab("Da Hood")
+local Section = Tab:NewSection("Main")
+Section:NewButton("ScriptHubV2", "Some", function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/scripthubekitten/SCRIPTHUBV2/main/SCRIPTHUBV2", true))()
+end)
+Section:NewButton("Zinc Hub", "Some", function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/Zinzs/luascripting/main/canyoutellitsadahoodscriptornot.lua"))()
+end)
+local Tab = Window:NewTab("MM2")
+local Section = Tab:NewSection("Main")
+Section:NewButton("Kidachi", "Some", function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/KidichiHB/Kidachi/main/Scripts/MM2_V2"))()
+end)
+Section:NewButton("Admin Panel MM2", "Some", function()
+	loadstring(game:HttpGet('https://raw.githubusercontent.com/woolips/tolis/main/77_7DBZZJU.lua'))()
+end)
+local Tab = Window:NewTab("TOH")
+local Section = Tab:NewSection("Main")
+Section:NewButton("Lightux", "Some", function()
+	loadstring(game:HttpGet('https://raw.githubusercontent.com/woolips/tolis/main/77_7DBZZJU.lua'))()
+end)
+Section:NewButton("Weinz Hub", "Some", function()
+	loadstring(game:HttpGet('https://raw.githubusercontent.com/weiny-ez/Weinz_Car-Dealership/main/weinz_cars.lua'))()
+end)
+local Tab = Window:NewTab("Other")
+local Section = Tab:NewSection("Main")
+Section:NewButton("Infinite yield", "Cmd roblox", function()
+    loadstring(game:HttpGet"https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source")()
+end)
+Section:NewButton("Dark Dex", "Studio", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Babyhamsta/RBLX_Scripts/main/Universal/BypassedDarkDexV3.lua", true))()
 end)
