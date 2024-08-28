@@ -1,3 +1,7 @@
+-- Get the services we need
+local TweenService = game:GetService("TweenService")
+local Workspace = game:GetService("Workspace")
+
 -- Define the teleport destinations
 local destinations = {
     Workspace.BoatStages.NormalStages.CaveStage1.DarknessPart,
