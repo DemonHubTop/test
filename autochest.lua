@@ -1,3 +1,4 @@
+Text = "Made by DemonHub/Jova,"; -- what the text says (ofc)
 local TweenService = game:GetService("TweenService")
 local Workspace = game:GetService("Workspace")
 
