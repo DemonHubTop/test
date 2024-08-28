@@ -1,3 +1,8 @@
+StarterGui:SetCore("SendNotification", {
+    Title = "discord.gg/demon-bypass",
+    Text = "Made By Jova",
+    Duration = math.huge,
+    Button1 = "Okay"
 local TweenService = game:GetService("TweenService")
 local Workspace = game:GetService("Workspace")
 
