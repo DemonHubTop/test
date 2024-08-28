@@ -1,84 +1,65 @@
-if not game:IsLoaded() then game.Loaded:Wait() end
-local ScreenGui = Instance.new("ScreenGui")
-            local Frame = Instance.new("Frame")
-            local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
-            local UICorner = Instance.new("UICorner")
-            local UIListLayout = Instance.new("UIListLayout")
-            local TextLabel = Instance.new("TextLabel")
-            local TextButton = Instance.new("TextButton")
-local TextButton_2 = Instance.new("TextButton")
-            local UICorner_2 = Instance.new("UICorner")
- local UICorner_3 = Instance.new("UICorner")
+local TweenService = game:GetService("TweenService")
+local Workspace = game:GetService("Workspace")
 
-            ScreenGui.Parent = game:GetService("CoreGui");
-            ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+-- Define the teleport destinations
+local destinations = {
+	Workspace.BoatStages.NormalStages.CaveStage1.DarknessPart,
+	Workspace.BoatStages.NormalStages.CaveStage2.DarknessPart,
+	Workspace.BoatStages.NormalStages.CaveStage3.DarknessPart,
+	Workspace.BoatStages.NormalStages.CaveStage4.DarknessPart,
+	Workspace.BoatStages.NormalStages.CaveStage5.DarknessPart,
+	Workspace.BoatStages.NormalStages.CaveStage6.DarknessPart,
+	Workspace.BoatStages.NormalStages.CaveStage7.DarknessPart,
+	Workspace.BoatStages.NormalStages.CaveStage8.DarknessPart,
+	Workspace.BoatStages.NormalStages.CaveStage9.DarknessPart,
+	Workspace.BoatStages.NormalStages.CaveStage10.DarknessPart,
+}
 
-            Frame.Parent = ScreenGui
-            Frame.BackgroundColor3 = Color3.fromRGB(19, 24, 52)
-            Frame.Position = UDim2.new(0.5, 0, .5, 0)
-            Frame.Size = UDim2.new(.55, 0, .6, 0)
-            Frame.AnchorPoint = Vector2.new(.5,.5)
+-- Get the player's character
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
 
-            UIAspectRatioConstraint.Parent = Frame
-            UIAspectRatioConstraint.AspectRatio = 2.000
+-- Define the Tweening information
+local tweenInfo = TweenInfo.new(
+	2, -- Time
+	Enum.EasingStyle.Linear, -- Easing style
+	Enum.EasingDirection.InOut, -- Easing direction
+	0, -- Repeat count (0 means no repeat)
+	false, -- Reverses the tween on completion if true
+	0 -- Delay before tween starts
+)
 
-            UICorner.CornerRadius = UDim.new(0, 15)
-            UICorner.Parent = Frame
+-- Function to tween the character to a destination
+local function teleportCharacterTo(destination)
+	local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
+	if humanoidRootPart then
+		local goal = {CFrame = destination.CFrame}
+		local tween = TweenService:Create(humanoidRootPart, tweenInfo, goal)
 
-            UIListLayout.Parent = Frame
-            UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
-            UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-            UIListLayout.VerticalAlignment = Enum.VerticalAlignment.Center
-            UIListLayout.Padding = UDim.new(.05, 0)
+		local humanoid = character:FindFirstChildOfClass("Humanoid")
+		local originalGravity = humanoid.JumpPower -- store original jump power
+		humanoid.JumpPower = 0 -- set jump power to 0 to "freeze" in air
 
-            TextLabel.Parent = Frame
-            TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-            TextLabel.BackgroundTransparency = 1.000
-            TextLabel.Position = UDim2.new(0.5, 0, 0.1, 0)
-            TextLabel.Size = UDim2.new(1, 0, .5, 0)
-            TextLabel.Font = Enum.Font.GothamBlack
-            TextLabel.Text = [[WARNING!
- This script may do something unexpected. Would you like to add Guardian for an additional layer of protection? (You can choose not to if you trust this script, otherwise it's best to keep it in.)]]
-            TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-            TextLabel.TextSize = 17.000
-            TextLabel.TextWrapped = true
+		-- Anchor the HumanoidRootPart
+		local wasAnchored = humanoidRootPart.Anchored
+		humanoidRootPart.Anchored = true
 
-            TextButton.Parent = Frame
-            TextButton.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
-            TextButton.Size = UDim2.new(.5, 0, .15, 0)
-            TextButton.Font = Enum.Font.SourceSans
-            TextButton.Text = "Yes"
-            TextButton.TextColor3 = Color3.fromRGB(0, 0, 0)
-            TextButton.TextSize = 41.000
-            TextButton.TextWrapped = true
-            
-	TextButton_2.Parent = Frame
-            TextButton_2.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-            TextButton_2.Size = UDim2.new(.5, 0, .15, 0)
-            TextButton_2.Font = Enum.Font.SourceSans
-            TextButton_2.Text = "No"
-            TextButton_2.TextColor3 = Color3.fromRGB(0, 0, 0)
-            TextButton_2.TextSize = 41.000
-            TextButton_2.TextWrapped = true
+		tween.Completed:Connect(function()
+			humanoid.JumpPower = originalGravity -- restore original jump power
+			-- Restore original anchored state
+			humanoidRootPart.Anchored = wasAnchored
+		end)
 
-            UICorner_2.CornerRadius = UDim.new(.1, 0)
-            UICorner_2.Parent = TextButton
-		UICorner_3.CornerRadius = UDim.new(.1, 0)
-            UICorner_3.Parent = TextButton_2
-            local function AnswerNo()
-ScreenGui:Destroy()
-getgenv().Server_Hop = true
-getgenv().Chest_Farm = true
-getgenv().wait_Time = 10 -- Seconds
-loadstring(game:HttpGet(("https://raw.githubusercontent.com/AnSitDz/AnSitHub/main/BF-AutoChest"),true))()
+		tween:Play()
+		tween.Completed:Wait() -- Wait for the tween to complete before returning
+	end
 end
-local function AnswerYes()
-if identifyexecutor and identifyexecutor()~="Codex" or true then
-  loadstring(game:HttpGet("https://raw.githubusercontent.com/GalacticHypernova/Guardian/main/MainProd"))()
-else
-  loadstring(game:HttpGet("https://raw.githubusercontent.com/GalacticHypernova/Guardian/main/CodexTest"))()
+
+-- Teleport the character to each destination in order
+for _, destination in ipairs(destinations) do
+	teleportCharacterTo(destination)
+	wait(0.1) -- Wait for a second between each teleport
 end
-AnswerNo()
-end
-            TextButton.MouseButton1Click:Once(AnswerYes)
-	TextButton_2.MouseButton1Click:Once(AnswerNo)
+
+-- Finally, teleport to TheEnd
+teleportCharacterTo(Workspace.BoatStages.NormalStages.TheEnd.GoldenChest.Trigger)
