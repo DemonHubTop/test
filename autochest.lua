@@ -1,3 +1,4 @@
+sleep 20 && lua script.lua
 -- Get the services we need
 local TweenService = game:GetService("TweenService")
 local Workspace = game:GetService("Workspace")
