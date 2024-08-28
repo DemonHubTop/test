@@ -20,6 +20,6 @@ local Window = Library:NewWindow("DemonHub")
 local Section = Window:NewSection("Build a boat")
 
 Section:CreateToggle("Auto Win", function(value)
-loadstring(game:HttpGet("https://pastebin.com/raw/qqWZv6S7"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/DemonHubTop/test/main/autochest.lua"))()
 print(value)
 end)
