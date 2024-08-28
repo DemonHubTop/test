@@ -1,17 +1,3 @@
-local function runTask()
-    print("Task executed")
-    -- Place your task code here
-end
-
-while true do
-    runTask()
-    os.execute("sleep 30") -- Wait for 30 seconds before running again
-end
-
--- Get the services we need
-local TweenService = game:GetService("TweenService")
-local Workspace = game:GetService("Workspace")
-
 -- Define the teleport destinations
 local destinations = {
     Workspace.BoatStages.NormalStages.CaveStage1.DarknessPart,
