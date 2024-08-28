@@ -1,4 +1,13 @@
-sleep 20 && lua script.lua
+local function runTask()
+    print("Task executed")
+    -- Place your task code here
+end
+
+while true do
+    runTask()
+    os.execute("sleep 10") -- Wait for 10 seconds before running again
+end
+
 -- Get the services we need
 local TweenService = game:GetService("TweenService")
 local Workspace = game:GetService("Workspace")
