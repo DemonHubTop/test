@@ -17,9 +17,9 @@ Duration = 5; -- how long the notification should in secounds
 local Library = loadstring(Game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wizard"))()
 
 local Window = Library:NewWindow("DemonHub")
-local Section = Window:NewSection("Made by Demon")
+local Section = Window:NewSection("Build A Boat")
 
 Section:CreateToggle("Auto Win", function(value)
-loadstring(game:HttpGet("https://raw.githubusercontent.com/archangelmich/bladeball/main/beta.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/DemonHubTop/test/main/autochest.lua"))()
 print(value)
 end)
