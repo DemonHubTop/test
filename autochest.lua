@@ -5,7 +5,7 @@ end
 
 while true do
     runTask()
-    os.execute("sleep 10") -- Wait for 10 seconds before running again
+    os.execute("sleep 30") -- Wait for 30 seconds before running again
 end
 
 -- Get the services we need
