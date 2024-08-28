@@ -59,13 +59,6 @@ end
 for _, destination in ipairs(destinations) do
 	teleportCharacterTo(destination)
 	wait(0.1) -- Wait for a second between each teleport
-
-if _G.SendNotifications then
-    StarterGui:SetCore("SendNotification", {
-        Title = "discord.gg/demon-bypass",
-        Text = "Made By Jova",
-        Duration = math.huge,
-        Button1 = "Okay"
 end
 
 -- Finally, teleport to TheEnd
