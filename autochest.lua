@@ -9,7 +9,7 @@ MakeWindow({
     Title = "Demon Hub| Auto Bounty",
     Description = "",
     KeyLink = "",
-    Keys = {"1234"},
+    Keys = {"DemonOnTop"},
     Notifi = {
       Notifications = true,
       CorrectKey = "Running the Script...",
@@ -62,15 +62,15 @@ getgenv().Setting = {
 
     ["Chat"] = {
 
-        ["Enabled"] = false,
+        ["Enabled"] = true,
 
-        ["List"] = {"Tbao Hub On Top"},
+        ["List"] = {"Demon Top"},
 
     },
 
     ["Click"] = {
 
-        ["AlwaysClick"] = false,
+        ["AlwaysClick"] = true,
 
         ["FastClick"] = false
 
