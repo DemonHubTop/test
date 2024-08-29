@@ -1,66 +1,182 @@
--- Get the services we need
-local TweenService = game:GetService("TweenService")
-local Workspace = game:GetService("Workspace")
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/REDzHUB/LibraryV2/main/redzLib")))()
+MakeWindow({
+  Hub = {
+    Title = "Auto bounty",
+    Animation = "Made By Jova"
+  },
+  Key = {
+    KeySystem = true,
+    Title = "Demon Hub| Auto Bounty",
+    Description = "",
+    KeyLink = "",
+    Keys = {"1234"},
+    Notifi = {
+      Notifications = true,
+      CorrectKey = "Running the Script...",
+      Incorrectkey = "The key is incorrect",
+      CopyKeyLink = "Copied to Clipboard"
+    }
+  }
+})
+ Main = MakeTab({Name = "Main"})
 
--- Define the teleport destinations
-local destinations = {
-    Workspace.BoatStages.NormalStages.CaveStage1.DarknessPart,
-    Workspace.BoatStages.NormalStages.CaveStage2.DarknessPart,
-    Workspace.BoatStages.NormalStages.CaveStage3.DarknessPart,
-    Workspace.BoatStages.NormalStages.CaveStage4.DarknessPart,
-    Workspace.BoatStages.NormalStages.CaveStage5.DarknessPart,
-    Workspace.BoatStages.NormalStages.CaveStage6.DarknessPart,
-    Workspace.BoatStages.NormalStages.CaveStage7.DarknessPart,
-    Workspace.BoatStages.NormalStages.CaveStage8.DarknessPart,
-    Workspace.BoatStages.NormalStages.CaveStage9.DarknessPart,
-    Workspace.BoatStages.NormalStages.CaveStage10.DarknessPart,
+local Toggle = AddButton(Main, {
+  Name = "Start",
+  Default = false,
+  Callback = function(Value)
+getgenv().Setting = {
+
+    ["Hunt"] = {
+
+        ["Team"] = "Pirates",
+
+        ["Min"] = 0,
+
+        ["Max"] = 30000000,
+
+        ["Webhook"] = true, 
+
+        ["Url"] = "you link webhook" -- paste you link webhook discord
+
+    },
+
+    ["Skip"] = {
+
+        ["V4"] = true,
+
+        ["Fruit"] = true,
+
+        ["FruitList"] = {
+
+            "Leopard",
+
+            "Venom",
+
+            "Dough",
+
+            "Portal"
+
+        }
+
+    },
+
+    ["Chat"] = {
+
+        ["Enabled"] = false,
+
+        ["List"] = {"Tbao Hub On Top"},
+
+    },
+
+    ["Click"] = {
+
+        ["AlwaysClick"] = false,
+
+        ["FastClick"] = false
+
+    },
+
+    ["Another"] = {
+
+        ["V3"] = true,
+
+        ["CustomHealth"] = true,
+
+        ["Health"] = 12000,
+
+        ["V4"] = true,
+
+        ["LockCamera"] = true,
+
+        ["FPSBoots"] = false,
+
+        ["WhiteScreen"] = false,
+
+        ["BypassTp"] = true
+
+    },
+
+    ["SafeHealth"] = {
+
+        ["Health"] = 3000,
+
+        ["HighY"] = 1500
+
+    },
+
+    ["Melee"] = {
+
+        ["Enable"] = true,
+
+        ["Delay"] = 2.5,
+
+        ["Z"] = {["Enable"] = true, ["HoldTime"] = 0},
+
+        ["X"] = {["Enable"] = true, ["HoldTime"] = 0},
+
+        ["C"] = {["Enable"] = true, ["HoldTime"] = 0},
+
+        ["V"] = {["Enable"] = true, ["HoldTime"] = 0}
+
+    },
+
+    ["Fruit"] = {
+
+        ["Enable"] = true,
+
+        ["Delay"] = 2,
+
+        ["Z"] = {["Enable"] = true, ["HoldTime"] = 0},
+
+        ["X"] = {["Enable"] = true, ["HoldTime"] = 0},
+
+        ["C"] = {["Enable"] = true, ["HoldTime"] = 0},
+
+        ["V"] = {["Enable"] = true, ["HoldTime"] = 1.25},
+
+        ["F"] = {["Enable"] = false, ["HoldTime"] = 0}
+
+    },
+
+    ["Sword"] = {
+
+        ["Enable"] = true,
+
+        ["Delay"] = 1,
+
+        ["Z"] = {["Enable"] = true, ["HoldTime"] = 0},
+
+        ["X"] = {["Enable"] = true, ["HoldTime"] = 0}
+
+    },
+
+    ["Gun"] = {
+
+        ["Enable"] = true,
+
+        ["GunMode"] = false, 
+
+        ["Delay"] = 1.75,
+
+        ["Z"] = {["Enable"] = true, ["HoldTime"] = 0},
+
+        ["X"] = {["Enable"] = true, ["HoldTime"] = 0}
+
+    }
+
 }
 
--- Get the player's character
-local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/vuquocoai123/lua/main/LoaderBounty.lua"))()
+ end
+})
 
--- Define the Tweening information
-local tweenInfo = TweenInfo.new(
-    2, -- Time
-    Enum.EasingStyle.Linear, -- Easing style
-    Enum.EasingDirection.InOut, -- Easing direction
-    0, -- Repeat count (0 means no repeat)
-    false, -- Reverses the tween on completion if true
-    0 -- Delay before tween starts
-)
 
--- Function to tween the character to a destination
-local function teleportCharacterTo(destination)
-    local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
-    if humanoidRootPart then
-        local goal = {CFrame = destination.CFrame}
-        local tween = TweenService:Create(humanoidRootPart, tweenInfo, goal)
 
-        local humanoid = character:FindFirstChildOfClass("Humanoid")
-        local originalGravity = humanoid.JumpPower -- store original jump power
-        humanoid.JumpPower = 0 -- set jump power to 0 to "freeze" in air
 
-        -- Anchor the HumanoidRootPart
-        local wasAnchored = humanoidRootPart.Anchored
-        humanoidRootPart.Anchored = true
 
-        tween.Completed:Connect(function()
-            humanoid.JumpPower = originalGravity -- restore original jump power
-            -- Restore original anchored state
-            humanoidRootPart.Anchored = wasAnchored
-        end)
-
-        tween:Play()
-        tween.Completed:Wait() -- Wait for the tween to complete before returning
-    end
-end
-
--- Teleport the character to each destination in order
-for _, destination in ipairs(destinations) do
-    teleportCharacterTo(destination)
-    wait(0.1) -- Wait for a second between each teleport
-end
-
--- Finally, teleport to TheEnd
-teleportCharacterTo(Workspace.BoatStages.NormalStages.TheEnd.GoldenChest.Trigger)
+local Toggle = AddButton(Main, {
+  Name = "Skip player",
+  Default = false,
+  Callback = function(Value)
+ end
+})
